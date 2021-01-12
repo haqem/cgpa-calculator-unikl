@@ -1,0 +1,613 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://haqem.com/assets/images/favicon.png">
+
+    <link rel="icon" href="/static/images/uplogo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/static/images/uplogo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/css/mdb.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.10/dist/css/uikit.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css" />
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css"
+        integrity="sha384-ekOryaXPbeCpWQNxMwSWVvQ0+1VrStoPJq54shlYhR8HzQgig1v5fas6YgOqLoKz" crossorigin="anonymous">
+
+
+    <!-- Primary Meta Tags -->
+    <title>GPA Calculator UNiKL • Haqem.com</title>
+    <meta name="title" content="GPA Calculator UNiKL • Haqem.com">
+    <meta name="description"
+        content="GPA Calculator UNiKL. Calculator CGPA UNiKL. For New student and Undergraduate student calculation.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://haqem.com/ipt/cgpa-calc-unikl.php">
+    <meta property="og:title" content="Cumulative GPA Calculator • Haqem.com">
+    <meta property="og:description"
+        content="GPA Calculator UNiKL. Calculator CGPA UNiKL. For New student and Undergraduate student calculation.">
+    <meta property="og:image" content="https://haqem.com/ipt/img/featured-unikl.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://haqem.com/ipt/cgpa-calc-unikl.php">
+    <meta property="twitter:title" content="GPA Calculator UNiKL • Haqem.com">
+    <meta property="twitter:description"
+        content="GPA Calculator UNiKL. Calculator CGPA UNiKL. For New student and Undergraduate student calculation.">
+    <meta property="twitter:image" content="https://haqem.com/ipt/img/featured-unikl.png">
+</head>
+<style>
+    input {
+        text-align: center;
+    }
+
+    html,
+    body {
+        background: #f8f8f8;
+    }
+
+    #space {
+        margin-bottom: 3%;
+    }
+
+    @media only screen and (max-width: 600px) {
+        #formspace {
+            margin-bottom: 3%;
+        }
+
+        #space {
+            margin-bottom: 15%;
+        }
+
+        #spacecol {
+            margin-bottom: 5%;
+        }
+
+        #button {
+            margin-top: -6%;
+        }
+    }
+</style>
+
+<body>
+    <a class="github-fork-ribbon" href="https://github.com/haqem" data-ribbon="Fork me on GitHub"
+        title="Fork me on GitHub">Fork me on GitHub</a>
+    <div class="container" style="margin-top:50px; margin-bottom: 20px;">
+        <div class="col-sm-12" style="text-align:center;">
+            <img id="logo" src="https://www.unikl.edu.my/wp-content/uploads/2017/11/unikl-logo-web.png" alt=""
+                width="125px;" style="margin-top:40px;">
+            <h2 style="font-weight: bold; margin-top: 10px;">CGPA Calculator Universiti Kuala Lumpur</h2>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"><b>Last Semester</b></h4>
+                            <p class="card-text">Are you in semester 1? Leave the blank!</p>
+                            <!-- Last semester -->
+                            <!-- <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Credit Hours</p> -->
+                            <form method="post" name="frmGrade0">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <!-- Credit hours input -->
+                                        <input type="number" class="input form-control" min="0.00" name="mycredithours"
+                                            id="formspace" title="Credit Hours" placeholder="Credit Hours"
+                                            onChange="computeField(this)">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <!-- Current GPA input -->
+                                        <input type="number" class="input1 form-control" step="0.01" min="0.00"
+                                            max="4.00" name="mygrade" id="formspace" title="Current GPA"
+                                            placeholder="Current GPA" onChange="computeForm(this.form)">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <!-- Current grade input -->
+                                        <input type="number" class=" input1 form-control" min="0.00"
+                                            name="mygradepoints" id="formspace" title="Current Grade"
+                                            placeholder="Current Grade" onChange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
+                            <!-- End of Last semester -->
+                            <h4 class="card-title"><b>Current Semester</b></h4>
+                            <p class="card-text">Fill Grade and Credit Hours Only.</p>
+                            <!-- Course 1 -->
+                            <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Course 1</p>
+                            <form method="post" name="frmGrade1">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select name="mygrade" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeForm(this.form); pointers(1, this.options[this.selectedIndex].value)">
+                                            <option value="">Select Grade</option>
+                                            <option value="4.00">A</option>
+                                            <option value="3.67">A-</option>
+                                            <option value="3.33">B+</option>
+                                            <option value="3.00">B</option>
+                                            <option value="2.67">B-</option>
+                                            <option value="2.33">C+</option>
+                                            <option value="2.00">C</option>
+                                            <option value="1.67">C-</option>
+                                            <option value="1.00">D</option>
+                                            <option value="0.00">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="pointergrade" id="formspace" class="form-control"
+                                            placeholder="Pointer" onchange="computeField(this)" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select name="mycredithours" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeField(this)">
+                                            <option value="">Select Credit Hours</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            onchange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Course 1 -->
+                            <!-- Course 2 -->
+                            <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Course 2</p>
+                            <form method="post" name="frmGrade2">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select name="mygrade" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeForm(this.form); pointers(2, this.options[this.selectedIndex].value)">
+                                            <option value="">Select Grade</option>
+                                            <option value="4.00">A</option>
+                                            <option value="3.67">A-</option>
+                                            <option value="3.33">B+</option>
+                                            <option value="3.00">B</option>
+                                            <option value="2.67">B-</option>
+                                            <option value="2.33">C+</option>
+                                            <option value="2.00">C</option>
+                                            <option value="1.67">C-</option>
+                                            <option value="1.00">D</option>
+                                            <option value="0.00">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="pointergrade" id="formspace" class="form-control"
+                                            placeholder="Pointer" onchange="computeField(this)" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select name="mycredithours" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeField(this)">
+                                            <option value="">Select Credit Hours</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            onchange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Course 2 -->
+                            <!-- Course 3 -->
+                            <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Course 3</p>
+                            <form method="post" name="frmGrade3">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select name="mygrade" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeForm(this.form); pointers(3, this.options[this.selectedIndex].value)">
+                                            <option value="">Select Grade</option>
+                                            <option value="4.00">A</option>
+                                            <option value="3.67">A-</option>
+                                            <option value="3.33">B+</option>
+                                            <option value="3.00">B</option>
+                                            <option value="2.67">B-</option>
+                                            <option value="2.33">C+</option>
+                                            <option value="2.00">C</option>
+                                            <option value="1.67">C-</option>
+                                            <option value="1.00">D</option>
+                                            <option value="0.00">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="pointergrade" id="formspace" class="form-control"
+                                            placeholder="Pointer" onchange="computeField(this)" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select name="mycredithours" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeField(this)">
+                                            <option value="">Select Credit Hours</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            onchange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Course 3 -->
+                            <!-- Course 4 -->
+                            <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Course 4</p>
+                            <form method="post" name="frmGrade4">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select name="mygrade" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeForm(this.form); pointers(4, this.options[this.selectedIndex].value)">
+                                            <option value="">Select Grade</option>
+                                            <option value="4.00">A</option>
+                                            <option value="3.67">A-</option>
+                                            <option value="3.33">B+</option>
+                                            <option value="3.00">B</option>
+                                            <option value="2.67">B-</option>
+                                            <option value="2.33">C+</option>
+                                            <option value="2.00">C</option>
+                                            <option value="1.67">C-</option>
+                                            <option value="1.00">D</option>
+                                            <option value="0.00">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="pointergrade" id="formspace" class="form-control"
+                                            placeholder="Pointer" onchange="computeField(this)" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select name="mycredithours" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeField(this)">
+                                            <option value="">Select Credit Hours</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            onchange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Course 4 -->
+                            <!-- Course 5 -->
+                            <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Course 5</p>
+                            <form method="post" name="frmGrade5">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select name="mygrade" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeForm(this.form); pointers(5, this.options[this.selectedIndex].value)">
+                                            <option value="">Select Grade</option>
+                                            <option value="4.00">A</option>
+                                            <option value="3.67">A-</option>
+                                            <option value="3.33">B+</option>
+                                            <option value="3.00">B</option>
+                                            <option value="2.67">B-</option>
+                                            <option value="2.33">C+</option>
+                                            <option value="2.00">C</option>
+                                            <option value="1.67">C-</option>
+                                            <option value="1.00">D</option>
+                                            <option value="0.00">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="pointergrade" id="formspace" class="form-control"
+                                            placeholder="Pointer" onchange="computeField(this)" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select name="mycredithours" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeField(this)">
+                                            <option value="">Select Credit Hours</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            onchange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Course 5 -->
+                            <!-- Course 6 -->
+                            <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Course 6</p>
+                            <form method="post" name="frmGrade6">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select name="mygrade" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeForm(this.form); pointers(6, this.options[this.selectedIndex].value)">
+                                            <option value="">Select Grade</option>
+                                            <option value="4.00">A</option>
+                                            <option value="3.67">A-</option>
+                                            <option value="3.33">B+</option>
+                                            <option value="3.00">B</option>
+                                            <option value="2.67">B-</option>
+                                            <option value="2.33">C+</option>
+                                            <option value="2.00">C</option>
+                                            <option value="1.67">C-</option>
+                                            <option value="1.00">D</option>
+                                            <option value="0.00">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="pointergrade" id="formspace" class="form-control"
+                                            placeholder="Pointer" onchange="computeField(this)" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select name="mycredithours" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeField(this)">
+                                            <option value="">Select Credit Hours</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            onchange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Course 6 -->
+                            <!-- Course 7 -->
+                            <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Course 7</p>
+                            <form method="post" name="frmGrade7">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select name="mygrade" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeForm(this.form); pointers(7, this.options[this.selectedIndex].value)">
+                                            <option value="">Select Grade</option>
+                                            <option value="4.00">A</option>
+                                            <option value="3.67">A-</option>
+                                            <option value="3.33">B+</option>
+                                            <option value="3.00">B</option>
+                                            <option value="2.67">B-</option>
+                                            <option value="2.33">C+</option>
+                                            <option value="2.00">C</option>
+                                            <option value="1.67">C-</option>
+                                            <option value="1.00">D</option>
+                                            <option value="0.00">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="pointergrade" id="formspace" class="form-control"
+                                            placeholder="Pointer" onchange="computeField(this)" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select name="mycredithours" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeField(this)">
+                                            <option value="">Select Credit Hours</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            onchange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Course 7 -->
+                            <!-- Course 8 -->
+                            <p class=" card-text" style="text-align:left; margin-bottom: 3px;">Course 8</p>
+                            <form method="post" name="frmGrade8">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <select name="mygrade" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeForm(this.form); pointers(8, this.options[this.selectedIndex].value)">
+                                            <option value="">Select Grade</option>
+                                            <option value="4.00">A</option>
+                                            <option value="3.67">A-</option>
+                                            <option value="3.33">B+</option>
+                                            <option value="3.00">B</option>
+                                            <option value="2.67">B-</option>
+                                            <option value="2.33">C+</option>
+                                            <option value="2.00">C</option>
+                                            <option value="1.67">C-</option>
+                                            <option value="1.00">D</option>
+                                            <option value="0.00">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="pointergrade" id="formspace" class="form-control"
+                                            placeholder="Pointer" onchange="computeField(this)" disabled>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select name="mycredithours" id="formspace"
+                                            class="browser-default custom-select dropdown"
+                                            onchange="computeField(this)">
+                                            <option value="">Select Credit Hours</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            onchange="computeField(this)" disabled>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Course 8 -->
+                            <hr>
+
+                            <h4 class="card-title"><b>Your Results is...</b></h4>
+                            <!-- <p class="card-text">Are you in semester 1? Leave the blank!</p> -->
+                            <form method="post" name="frmGrade9">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <p class="card-text" style="text-align:left; margin-bottom: 3px;">Grade</p>
+                                        <input type="number" name="mygradepoints" id="formspace" class="form-control"
+                                            disabled>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p class="card-text" style="text-align:left; margin-bottom: 3px;">Total Credit
+                                            Hours</p>
+                                        <input type="text" name="mycredithours" id="formspace" class="form-control"
+                                            disabled>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <p class="card-text" style="text-align:left; margin-bottom: 3px;">Pointer</p>
+                                        <input type="text" name="mygrade" id="formspace" class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="uk-margin">
+                                            <a class="uk-button uk-button-secondary uk-margin-top"
+                                                onclick="computesumForm(this.form)">Calculate</a>
+                                            <a class="uk-button uk-button-default uk-margin-top"
+                                                onClick="window.location.reload();">Reset Data</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+        <div class="container py-4">
+            <div class="copyright">
+                © <span id="year"></span> Copyright <strong><span>Haqem Network</span></strong>. All Rights Reserved
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
+    <script language="JavaScript">
+        // function checkNumber(input, min, max, msg) {
+        //     msg = msg + " field has invalid data: " + input.value;
+        //     var str = input.value;
+        //     var value = str.toFixed(2);
+        //     for (var i = 0; i < str.length; i++) {
+        //         var ch = str.substring(i, i + 1)
+        //         if ((ch < "0" || "9" < ch) && ch != '.') {
+        //             alert(msg);
+        //             return false;
+        //         }
+        //     }
+        // }
+
+        //Untuk Grade Points
+        function computeGradenum2(input) {
+
+            var mygradepoints = input;
+            var thegrade = input;
+            //  if (thegrade=="A"  || thegrade=="a") mygradepoints=4;
+            if (thegrade == "A+");
+            if (thegrade == "A");
+            if (thegrade == "A-");
+            if (thegrade == "B+");
+            if (thegrade == "B");
+            if (thegrade == "B-");
+            if (thegrade == "C+");
+            if (thegrade == "C");
+            if (thegrade == "C-");
+            if (thegrade == "D+");
+            if (thegrade == "D");
+            if (thegrade == "F");
+
+            return mygradepoints;
+        }
+
+        function computeField(input) {
+            if (input.value != null && input.value.length != 0)
+                input.value = "" + eval(input.value);
+            computeForm(input.form);
+        }
+
+        function computeForm(form) {
+            form.mygradepoints.value = ((computeGradenum2(form.mygrade.value)) * form.mycredithours.value);
+        }
+
+        //Proses kira-kira
+        function computesumForm(form) {
+            document.forms["frmGrade9"].mygradepoints.value = 0;
+            document.forms["frmGrade9"].mycredithours.value = 0;
+            document.forms["frmGrade9"].mygrade.value = 0;
+
+            for (var i = 0; i < 9; i++) {
+                if (!(document.forms['frmGrade' + i].mycredithours.value == null || document.forms['frmGrade' + i].mycredithours.value.length == 0)) {
+                    if (!(document.forms['frmGrade' + i].mycredithours.value == null || document.forms['frmGrade' + i].mycredithours.value.length == 0)) {
+                        var temp = computeField(document.forms['frmGrade' + i].mygradepoints);
+                        var temp = computeField(document.forms['frmGrade' + i].mycredithours);
+                        // var temp = computeForm(document.forms['frmGrade' + i]);
+                        //Total Grade
+                        if (!(document.forms['frmGrade' + i].mygradepoints.value == 0))
+                            document.forms["frmGrade9"].mygradepoints.value = eval(document.forms["frmGrade9"].mygradepoints.value) + (eval(document.forms['frmGrade' + i].mygradepoints.value));
+                        if (!(document.forms['frmGrade' + i].mycredithours.value == 0))
+                            document.forms["frmGrade9"].mycredithours.value = eval(document.forms["frmGrade9"].mycredithours.value) + (eval(document.forms['frmGrade' + i].mycredithours.value));
+                    }
+                }
+            }
+            if (!(document.forms["frmGrade9"].mycredithours.value == 0))
+                document.forms["frmGrade9"].mygrade.value = (eval(document.forms["frmGrade9"].mygradepoints.value) / (eval(document.forms["frmGrade9"].mycredithours.value)));
+        }
+
+        function clearForm(form) {
+            form.mycredithours.value = "";
+            form.mygrade.value = "";
+            form.mygradepoints.value = "";
+        }
+
+        //Untuk Grade Pointer
+        function pointers(field, grade_point) {
+
+            var textfield = "pointergrade";
+            document.forms["frmGrade" + field].elements[textfield].value = grade_point;
+        }
+
+        while (index <= 8) {
+            pointers(index, document.forms['frmGrade'].value);
+
+        }
+
+        window.onload = function () {
+            location.href = document.getElementById("selectbox").value;
+        }
+    </script>
+</body>
+
+</html>
