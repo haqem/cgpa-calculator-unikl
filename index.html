@@ -70,8 +70,9 @@
 </style>
 
 <body>
-    <a class="github-fork-ribbon" href="https://github.com/haqem" data-ribbon="Fork me on GitHub"
-        title="Fork me on GitHub">Fork me on GitHub</a>
+<!--     <a class="github-fork-ribbon" href="https://github.com/haqem" data-ribbon="Fork me on GitHub"
+        title="Fork me on GitHub">Fork me on GitHub</a> -->
+    <a class="github-corner" href="###" title="Fork me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250"><title>Fork me on GitHub</title><path d="M0 0h250v250"></path><path class="octo-arm" d="M127.4 110c-14.6-9.2-9.4-19.5-9.4-19.5 3-7 1.5-11 1.5-11-1-6.2 3-2 3-2 4 4.7 2 11 2 11-2.2 10.4 5 14.8 9 16.2" fill="currentColor" style="transform-origin:130px 110px"></path><path class="octo-body" d="M113.2 114.3s3.6 1.6 4.7.6l15-13.7c3-2.4 6-3 8.2-2.7-8-11.2-14-25 3-41 4.7-4.4 10.6-6.4 16.2-6.4.6-1.6 3.6-7.3 11.8-10.7 0 0 4.5 2.7 6.8 16.5 4.3 2.7 8.3 6 12 9.8 3.3 3.5 6.7 8 8.6 12.3 14 3 16.8 8 16.8 8-3.4 8-9.4 11-11.4 11 0 5.8-2.3 11-7.5 15.5-16.4 16-30 9-40 .2 0 3-1 7-5.2 11l-13.3 11c-1 1 .5 5.3.8 5z" fill="currentColor"></path></svg><style> .github-corner svg{position:absolute;right:0;top:0;mix-blend-mode:darken;color:#ffffff;fill:#000000;}.github-corner:hover .octo-arm{animation:octocat-wave .56s;}@keyframes octocat-wave{0%, 100%{transform:rotate(0);}20%, 60%{transform:rotate(-20deg);}40%, 80%{transform:rotate(10deg);}}</style></a>
     <div class="container" style="margin-top:50px; margin-bottom: 20px;">
         <div class="col-sm-12" style="text-align:center;">
             <img id="logo" src="https://www.unikl.edu.my/wp-content/uploads/2017/11/unikl-logo-web.png" alt=""
@@ -515,7 +516,98 @@
     <script>
         document.getElementById("year").innerHTML = new Date().getFullYear();
     </script>
-    
+    <script language="JavaScript">
+        // function checkNumber(input, min, max, msg) {
+        //     msg = msg + " field has invalid data: " + input.value;
+        //     var str = input.value;
+        //     var value = str.toFixed(2);
+        //     for (var i = 0; i < str.length; i++) {
+        //         var ch = str.substring(i, i + 1)
+        //         if ((ch < "0" || "9" < ch) && ch != '.') {
+        //             alert(msg);
+        //             return false;
+        //         }
+        //     }
+        // }
+
+        //Untuk Grade Points
+        function computeGradenum2(input) {
+
+            var mygradepoints = input;
+            var thegrade = input;
+            //  if (thegrade=="A"  || thegrade=="a") mygradepoints=4;
+            if (thegrade == "A+");
+            if (thegrade == "A");
+            if (thegrade == "A-");
+            if (thegrade == "B+");
+            if (thegrade == "B");
+            if (thegrade == "B-");
+            if (thegrade == "C+");
+            if (thegrade == "C");
+            if (thegrade == "C-");
+            if (thegrade == "D+");
+            if (thegrade == "D");
+            if (thegrade == "F");
+
+            return mygradepoints;
+        }
+
+        function computeField(input) {
+            if (input.value != null && input.value.length != 0)
+                input.value = "" + eval(input.value);
+            computeForm(input.form);
+        }
+
+        function computeForm(form) {
+            form.mygradepoints.value = ((computeGradenum2(form.mygrade.value)) * form.mycredithours.value);
+        }
+
+        //Proses kira-kira
+        function computesumForm(form) {
+            document.forms["frmGrade9"].mygradepoints.value = 0;
+            document.forms["frmGrade9"].mycredithours.value = 0;
+            document.forms["frmGrade9"].mygrade.value = 0;
+
+            for (var i = 0; i < 9; i++) {
+                if (!(document.forms['frmGrade' + i].mycredithours.value == null || document.forms['frmGrade' + i].mycredithours.value.length == 0)) {
+                    if (!(document.forms['frmGrade' + i].mycredithours.value == null || document.forms['frmGrade' + i].mycredithours.value.length == 0)) {
+                        var temp = computeField(document.forms['frmGrade' + i].mygradepoints);
+                        var temp = computeField(document.forms['frmGrade' + i].mycredithours);
+                        // var temp = computeForm(document.forms['frmGrade' + i]);
+                        //Total Grade
+                        if (!(document.forms['frmGrade' + i].mygradepoints.value == 0))
+                            document.forms["frmGrade9"].mygradepoints.value = eval(document.forms["frmGrade9"].mygradepoints.value) + (eval(document.forms['frmGrade' + i].mygradepoints.value));
+                        if (!(document.forms['frmGrade' + i].mycredithours.value == 0))
+                            document.forms["frmGrade9"].mycredithours.value = eval(document.forms["frmGrade9"].mycredithours.value) + (eval(document.forms['frmGrade' + i].mycredithours.value));
+                    }
+                }
+            }
+            if (!(document.forms["frmGrade9"].mycredithours.value == 0))
+                document.forms["frmGrade9"].mygrade.value = (eval(document.forms["frmGrade9"].mygradepoints.value) / (eval(document.forms["frmGrade9"].mycredithours.value)));
+        }
+
+        function clearForm(form) {
+            form.mycredithours.value = "";
+            form.mygrade.value = "";
+            form.mygradepoints.value = "";
+        }
+
+        //Untuk Grade Pointer
+        function pointers(field, grade_point) {
+
+            var textfield = "pointergrade";
+            document.forms["frmGrade" + field].elements[textfield].value = grade_point;
+        }
+
+        while (index <= 8) {
+            pointers(index, document.forms['frmGrade'].value);
+
+        }
+
+        window.onload = function () {
+            location.href = document.getElementById("selectbox").value;
+        }
+    </script>
 </body>
 
 </html>
