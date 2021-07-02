@@ -81,6 +81,9 @@
                 <div class="col-sm">
                     <div class="card">
                         <div class="card-body">
+                            <div class="alert alert-danger" role="alert">
+                              Looking for other IPT? Check it out <a href="https://haqem.com/ipt?ref=haqem.github.io">haqem.com/ipt</a>
+                            </div>
                             <h4 class="card-title"><b>Last Semester</b></h4>
                             <p class="card-text">Are you in semester 1? Leave the blank!</p>
                             <!-- Last semester -->
@@ -512,98 +515,7 @@
     <script>
         document.getElementById("year").innerHTML = new Date().getFullYear();
     </script>
-    <script language="JavaScript">
-        // function checkNumber(input, min, max, msg) {
-        //     msg = msg + " field has invalid data: " + input.value;
-        //     var str = input.value;
-        //     var value = str.toFixed(2);
-        //     for (var i = 0; i < str.length; i++) {
-        //         var ch = str.substring(i, i + 1)
-        //         if ((ch < "0" || "9" < ch) && ch != '.') {
-        //             alert(msg);
-        //             return false;
-        //         }
-        //     }
-        // }
-
-        //Untuk Grade Points
-        function computeGradenum2(input) {
-
-            var mygradepoints = input;
-            var thegrade = input;
-            //  if (thegrade=="A"  || thegrade=="a") mygradepoints=4;
-            if (thegrade == "A+");
-            if (thegrade == "A");
-            if (thegrade == "A-");
-            if (thegrade == "B+");
-            if (thegrade == "B");
-            if (thegrade == "B-");
-            if (thegrade == "C+");
-            if (thegrade == "C");
-            if (thegrade == "C-");
-            if (thegrade == "D+");
-            if (thegrade == "D");
-            if (thegrade == "F");
-
-            return mygradepoints;
-        }
-
-        function computeField(input) {
-            if (input.value != null && input.value.length != 0)
-                input.value = "" + eval(input.value);
-            computeForm(input.form);
-        }
-
-        function computeForm(form) {
-            form.mygradepoints.value = ((computeGradenum2(form.mygrade.value)) * form.mycredithours.value);
-        }
-
-        //Proses kira-kira
-        function computesumForm(form) {
-            document.forms["frmGrade9"].mygradepoints.value = 0;
-            document.forms["frmGrade9"].mycredithours.value = 0;
-            document.forms["frmGrade9"].mygrade.value = 0;
-
-            for (var i = 0; i < 9; i++) {
-                if (!(document.forms['frmGrade' + i].mycredithours.value == null || document.forms['frmGrade' + i].mycredithours.value.length == 0)) {
-                    if (!(document.forms['frmGrade' + i].mycredithours.value == null || document.forms['frmGrade' + i].mycredithours.value.length == 0)) {
-                        var temp = computeField(document.forms['frmGrade' + i].mygradepoints);
-                        var temp = computeField(document.forms['frmGrade' + i].mycredithours);
-                        // var temp = computeForm(document.forms['frmGrade' + i]);
-                        //Total Grade
-                        if (!(document.forms['frmGrade' + i].mygradepoints.value == 0))
-                            document.forms["frmGrade9"].mygradepoints.value = eval(document.forms["frmGrade9"].mygradepoints.value) + (eval(document.forms['frmGrade' + i].mygradepoints.value));
-                        if (!(document.forms['frmGrade' + i].mycredithours.value == 0))
-                            document.forms["frmGrade9"].mycredithours.value = eval(document.forms["frmGrade9"].mycredithours.value) + (eval(document.forms['frmGrade' + i].mycredithours.value));
-                    }
-                }
-            }
-            if (!(document.forms["frmGrade9"].mycredithours.value == 0))
-                document.forms["frmGrade9"].mygrade.value = (eval(document.forms["frmGrade9"].mygradepoints.value) / (eval(document.forms["frmGrade9"].mycredithours.value)));
-        }
-
-        function clearForm(form) {
-            form.mycredithours.value = "";
-            form.mygrade.value = "";
-            form.mygradepoints.value = "";
-        }
-
-        //Untuk Grade Pointer
-        function pointers(field, grade_point) {
-
-            var textfield = "pointergrade";
-            document.forms["frmGrade" + field].elements[textfield].value = grade_point;
-        }
-
-        while (index <= 8) {
-            pointers(index, document.forms['frmGrade'].value);
-
-        }
-
-        window.onload = function () {
-            location.href = document.getElementById("selectbox").value;
-        }
-    </script>
+    
 </body>
 
 </html>
